@@ -1,6 +1,6 @@
 /*
   Stepper.cpp - - Stepper library for Wiring/Arduino - Version 0.4
-  with veriations to run different steppers on junkbot
+  
   Original library     (0.1) by Tom Igoe.
   Two-wire modifications   (0.2) by Sebastian Gassner
   Combination version   (0.3) by Tom Igoe and David Mellis
@@ -151,7 +151,7 @@ void Stepper::step(int steps_to_move)
       // decrement the steps left:
       steps_left--;
       // step the motor to step number 0, 1, 2, or 3:
-      stepMotor(this->step_number % 4);
+      stepMotor(this->step_number % 8);
     }
   }
 }
@@ -184,15 +184,15 @@ void Stepper::stepMotor(int thisStep)
   if (this->pin_count == 4) {
     switch (thisStep) {
       case 0:    // 1010
-      digitalWrite(motor_pin_1, HIGH);
-      digitalWrite(motor_pin_2, LOW);
+      digitalWrite(motor_pin_1, LOW);
+      digitalWrite(motor_pin_2, HIGH);
       digitalWrite(motor_pin_3, LOW);
       digitalWrite(motor_pin_4, LOW);
       break;
       case 1:    // 0110
       digitalWrite(motor_pin_1, LOW);
       digitalWrite(motor_pin_2, HIGH);
-      digitalWrite(motor_pin_3, LOW);
+      digitalWrite(motor_pin_3, HIGH);
       digitalWrite(motor_pin_4, LOW);
       break;
       case 2:    //0101
@@ -204,10 +204,36 @@ void Stepper::stepMotor(int thisStep)
       case 3:    //1001
       digitalWrite(motor_pin_1, LOW);
       digitalWrite(motor_pin_2, LOW);
+      digitalWrite(motor_pin_3, HIGH);
+      digitalWrite(motor_pin_4, HIGH);
+      break;
+	case 4:    // 1010
+      digitalWrite(motor_pin_1, LOW);
+      digitalWrite(motor_pin_2, LOW);
       digitalWrite(motor_pin_3, LOW);
       digitalWrite(motor_pin_4, HIGH);
       break;
-    } 
+      case 5:    // 0110
+      digitalWrite(motor_pin_1, HIGH);
+      digitalWrite(motor_pin_2, LOW);
+      digitalWrite(motor_pin_3, LOW);
+      digitalWrite(motor_pin_4, HIGH);
+      break;
+      case 6:    //0101
+      digitalWrite(motor_pin_1, HIGH);
+      digitalWrite(motor_pin_2, LOW);
+      digitalWrite(motor_pin_3, LOW);
+      digitalWrite(motor_pin_4, LOW);
+      break;
+      case 7:    //1001
+      digitalWrite(motor_pin_1, HIGH);
+      digitalWrite(motor_pin_2, HIGH);
+      digitalWrite(motor_pin_3, LOW);
+      digitalWrite(motor_pin_4, LOW);
+      break;
+
+    
+	} 
   }
 }
 
